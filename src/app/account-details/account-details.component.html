@@ -1,0 +1,105 @@
+<div class="account-details-container">
+  <div class="header-section">
+    <button mat-icon-button (click)="goBack()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>
+      <mat-icon>{{ getAccountIcon() }}</mat-icon>
+      {{ accountName }}
+    </h1>
+  </div>
+
+  @if (accountType) {
+  <mat-card class="transactions-card">
+    <mat-card-content>
+      <h2 class="transactions-header">
+        <mat-icon>account_balance</mat-icon>
+        Транзакции
+      </h2>
+
+      <div class="summary-section">
+        <div class="summary-item balance-current">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <div class="summary-content">
+            <span class="summary-label">Текущ баланс</span>
+            <span class="summary-value balance-current-value">
+              €{{ accountBalance | number : "1.2-2" }}
+            </span>
+          </div>
+        </div>
+
+        <div class="summary-item income">
+          <mat-icon>trending_up</mat-icon>
+          <div class="summary-content">
+            <span class="summary-label">Приходи за 2026</span>
+            <span class="summary-value income-value">
+              €{{ incomeTotal | number : "1.2-2" }}
+            </span>
+          </div>
+        </div>
+
+        <div class="summary-item expense">
+          <mat-icon>trending_down</mat-icon>
+          <div class="summary-content">
+            <span class="summary-label">Разходи за 2026</span>
+            <span class="summary-value expense-value">
+              €{{ expenseTotal | number : "1.2-2" }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      @if (transactions.length > 0) {
+      <div class="transactions-list">
+        @for (transaction of transactions; track transaction.id) {
+        <div
+          class="transaction-item"
+          [class.income]="transaction.type === 'income'"
+          [class.expense]="transaction.type === 'expense'"
+        >
+          <div class="transaction-icon-wrapper">
+            <mat-icon>{{
+              transaction.type === "income" ? "arrow_upward" : "arrow_downward"
+            }}</mat-icon>
+          </div>
+          <div class="transaction-content">
+            <div class="transaction-header">
+              <span class="transaction-description">{{
+                transaction.description
+              }}</span>
+              <span
+                class="transaction-amount"
+                [class.income-amount]="transaction.type === 'income'"
+                [class.expense-amount]="transaction.type === 'expense'"
+              >
+                {{ transaction.type === "income" ? "+" : "-" }}€{{
+                  transaction.amount | number : "1.2-2"
+                }}
+              </span>
+            </div>
+            <div class="transaction-date">
+              <mat-icon class="date-icon">calendar_today</mat-icon>
+              <span>{{ transaction.date | monthYear }}</span>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="empty-transactions">
+        <mat-icon class="empty-icon">inbox</mat-icon>
+        <p>Няма налични транзакции</p>
+      </div>
+      }
+    </mat-card-content>
+  </mat-card>
+  } @else {
+  <mat-card class="error-card">
+    <mat-card-content>
+      <mat-icon class="error-icon">error_outline</mat-icon>
+      <p>Сметката не е намерена</p>
+      <button mat-button (click)="goBack()">Върни се назад</button>
+    </mat-card-content>
+  </mat-card>
+  }
+</div>

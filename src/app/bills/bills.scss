@@ -1,0 +1,354 @@
+.bills-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  animation: fadeIn 0.4s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px 16px;
+  }
+
+  .header-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+
+    .back-button {
+      color: rgba(255, 255, 255, 0.87);
+      transition: all 0.3s ease;
+      border-radius: 50%;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.1);
+      }
+    }
+
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+      font-size: 2.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+      flex: 1;
+
+      mat-icon {
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+
+        mat-icon {
+          font-size: 1.5rem;
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+    }
+  }
+
+  .bills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .bill-card {
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-4px);
+
+      &::before {
+        width: 6px;
+      }
+    }
+
+    &.paid {
+      border-left: 5px solid #4caf50;
+
+      &::before {
+        background: #4caf50;
+      }
+    }
+
+    &.unpaid {
+      border-left: 5px solid #f44336;
+
+      &::before {
+        background: #f44336;
+      }
+    }
+
+    ::ng-deep .mat-mdc-card-content {
+      padding: 24px;
+
+      @media (max-width: 480px) {
+        padding: 16px;
+      }
+    }
+
+    .bill-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+
+      @media (max-width: 480px) {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .bill-icon-wrapper {
+        flex-shrink: 0;
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        transition: transform 0.3s ease;
+
+        @media (max-width: 480px) {
+          width: 56px;
+          height: 56px;
+        }
+      }
+
+      .bill-card:hover .bill-icon-wrapper {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .bill-icon {
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+
+        @media (max-width: 480px) {
+          font-size: 32px;
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .bill-info {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+
+        @media (max-width: 480px) {
+          min-width: 0;
+          flex: 1 1 auto;
+          max-width: calc(100% - 80px);
+        }
+
+        .bill-type {
+          margin: 0 0 4px 0;
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.87);
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+
+          @media (max-width: 480px) {
+            font-size: 1.1rem;
+          }
+        }
+
+        .bill-description {
+          margin: 0;
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.6);
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+
+          @media (max-width: 480px) {
+            font-size: 0.85rem;
+          }
+        }
+      }
+
+      .bill-amount {
+        text-align: right;
+        flex-shrink: 0;
+
+        @media (max-width: 480px) {
+          width: 100%;
+          text-align: left;
+          margin-top: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+
+        .amount-value {
+          display: block;
+          font-size: 1.75rem;
+          font-weight: 700;
+          color: rgba(255, 255, 255, 0.87);
+          margin-bottom: 10px;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: -0.5px;
+
+          &.not-issued {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+          }
+
+          @media (max-width: 480px) {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+
+            &.not-issued {
+              font-size: 1rem;
+            }
+          }
+        }
+
+        .paid-badge,
+        .unpaid-badge {
+          display: inline-block;
+          padding: 6px 14px;
+          border-radius: 20px;
+          font-size: 0.75rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          transition: transform 0.3s ease;
+
+          @media (max-width: 480px) {
+            padding: 5px 12px;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+          }
+        }
+
+        .bill-card:hover .paid-badge,
+        .bill-card:hover .unpaid-badge {
+          transform: scale(1.05);
+        }
+
+        .paid-badge {
+          background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+          color: white;
+        }
+
+        .unpaid-badge {
+          background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+          color: white;
+        }
+      }
+    }
+
+    .bill-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+      .detail-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .detail-label {
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.6);
+          white-space: nowrap;
+        }
+
+        .detail-value {
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.87);
+        }
+      }
+    }
+  }
+
+  .empty-card {
+    text-align: center;
+    padding: 64px 24px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+    .empty-icon {
+      font-size: 80px;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 24px;
+      opacity: 0.6;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
+    }
+  }
+}
+

@@ -1,0 +1,97 @@
+<div class="apartment-details-container">
+  <div class="header-section">
+    <button mat-icon-button (click)="goBack()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>
+      <mat-icon>home</mat-icon>
+      Апартамент {{ apartment?.number }}
+    </h1>
+  </div>
+
+  @if (apartment) {
+    <mat-card class="details-card">
+      <mat-card-content>
+        <div class="details-container">
+          <div class="detail-item">
+            <mat-icon class="detail-icon">people</mat-icon>
+            <div class="detail-content">
+              <span class="detail-label">Брой живущи</span>
+              <span class="detail-value">{{
+                apartment.residentsCount || "Няма данни"
+              }}</span>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <mat-icon class="detail-icon">payments</mat-icon>
+            <div class="detail-content">
+              <div class="label-with-info">
+                <span class="detail-label">Месечна такса</span>
+                <mat-icon
+                  class="info-icon"
+                  [vhTippy]="tooltipHtml"
+                  [tippyOptions]="{
+                    placement: 'top',
+                    allowHTML: true,
+                    theme: 'fee-tooltip',
+                    zIndex: 10000,
+                  }"
+                >
+                  info
+                </mat-icon>
+              </div>
+              <span class="detail-value">
+                {{
+                  getMonthlyFee()
+                    ? "€" + (getMonthlyFee() | number: "1.2-2")
+                    : "Няма данни"
+                }}
+              </span>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <mat-icon
+              class="detail-icon"
+              [class.warning]="apartment.totalDebt && apartment.totalDebt > 0"
+            >
+              account_balance_wallet
+            </mat-icon>
+            <div class="detail-content">
+              <span class="detail-label">Дължими суми до момента</span>
+              <span
+                class="detail-value"
+                [class.debt]="apartment.totalDebt && apartment.totalDebt > 0"
+              >
+                {{
+                  apartment.totalDebt
+                    ? "€" + (apartment.totalDebt | number: "1.2-2")
+                    : "Няма"
+                }}
+              </span>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <mat-icon class="detail-icon">calendar_today</mat-icon>
+            <div class="detail-content">
+              <span class="detail-label">Платено до</span>
+              <span class="detail-value">
+                {{ apartment.lastPaymentDate | monthYear }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card class="error-card">
+      <mat-card-content>
+        <mat-icon class="error-icon">error_outline</mat-icon>
+        <p>Апартаментът не е намерен</p>
+        <button mat-button (click)="goBack()">Върни се назад</button>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

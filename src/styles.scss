@@ -1,0 +1,132 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define a custom theme using Material Design 3
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$cyan-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto',
+    plain-family: 'Roboto',
+    bold-weight: 500,
+    regular-weight: 400,
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+@include mat.all-component-themes($theme);
+
+// Global styles
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, #1a1d2a 0%, #2a2d3a 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Better focus states for accessibility
+*:focus-visible {
+  outline: 2px solid var(--mat-primary-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+// Tippy.js custom theme for fee tooltip
+.tippy-box[data-theme~='fee-tooltip'] {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  max-width: 340px;
+  min-width: 280px;
+  font-family: 'Roboto', sans-serif;
+  z-index: 10000 !important;
+}
+
+.tippy-box[data-theme~='fee-tooltip'] .tippy-content {
+  padding: 16px 18px;
+}
+
+.fee-tooltip-content {
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: #ffffff;
+}
+
+.fee-tooltip-header {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #ffffff;
+  
+  strong {
+    font-weight: 600;
+  }
+}
+
+.fee-tooltip-divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 12px 0;
+}
+
+.fee-tooltip-section {
+  margin-bottom: 14px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.fee-tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.fee-label {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.fee-amount {
+  font-weight: 600;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.fee-tooltip-destination {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 2px 0 4px 0;
+}
+
+.fee-tooltip-note {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 4px;
+}

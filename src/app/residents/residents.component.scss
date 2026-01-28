@@ -1,0 +1,463 @@
+.residents-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  animation: fadeIn 0.4s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px 16px;
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.25rem;
+      font-weight: 600;
+      text-align: center;
+      flex: 1;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+        text-align: left;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .bills-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      padding: 10px 20px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.87);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+
+        mat-icon {
+          color: white;
+        }
+      }
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover mat-icon {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .announcements-card {
+    margin-bottom: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      margin-bottom: 24px;
+      border-radius: 12px;
+    }
+
+    ::ng-deep .mat-mdc-card-content {
+      padding: 24px;
+    }
+
+    .announcements-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+
+      .announcements-icon {
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+
+        @media (max-width: 480px) {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    .announcements-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .announcement-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.25);
+          transform: translateX(4px);
+        }
+
+        .announcement-icon {
+          font-size: 24px;
+          width: 24px;
+          height: 24px;
+          margin-top: 2px;
+          flex-shrink: 0;
+        }
+
+        .announcement-content {
+          flex: 1;
+
+          .announcement-text {
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            font-weight: 500;
+
+            @media (max-width: 480px) {
+              font-size: 1rem;
+            }
+          }
+
+          .announcement-date {
+            display: inline-block;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  .accounts-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .account-card {
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      &.clickable {
+        cursor: pointer;
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      ::ng-deep .mat-mdc-card-content {
+        padding: 24px;
+      }
+
+      .account-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .account-icon {
+          font-size: 48px;
+          width: 48px;
+          height: 48px;
+          color: rgba(255, 255, 255, 0.87);
+          flex-shrink: 0;
+          transition: transform 0.3s ease;
+
+          @media (max-width: 480px) {
+            font-size: 40px;
+            width: 40px;
+            height: 40px;
+          }
+        }
+
+        .account-info {
+          flex: 1;
+
+          h2 {
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.87);
+          }
+
+          .account-amount {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.5px;
+
+            @media (max-width: 480px) {
+              font-size: 1.75rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .apartments-card {
+    margin-top: 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    ::ng-deep .mat-mdc-card-header {
+      padding: 24px 24px 16px;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    }
+
+    ::ng-deep .mat-mdc-card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.87);
+    }
+
+    ::ng-deep .mat-mdc-card-content {
+      padding: 24px;
+    }
+
+    .apartments-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+
+        .floor-row {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .floor-label {
+          min-width: 100px;
+          font-weight: 700;
+          font-size: 1.1rem;
+          color: rgba(255, 255, 255, 0.87);
+          padding: 8px 16px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          text-align: center;
+
+          @media (max-width: 768px) {
+            min-width: auto;
+            font-size: 1rem;
+            padding: 6px 12px;
+          }
+        }
+
+        .apartments-row {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          gap: 12px;
+          flex: 1;
+          max-width: 100%;
+
+          @media (max-width: 768px) {
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            width: 100%;
+          }
+
+          @media (max-width: 480px) {
+            grid-template-columns: 1fr;
+          }
+
+          .apartment-cell {
+            padding: 20px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 3px;
+              background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+              transform: scaleX(0);
+              transition: transform 0.3s ease;
+            }
+
+            &.clickable {
+              cursor: pointer;
+            }
+
+            &:not(.empty):hover {
+              border-color: #667eea;
+              box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+              transform: translateY(-4px);
+
+              &::before {
+                transform: scaleX(1);
+              }
+            }
+
+            &.empty {
+              background: transparent;
+              border: none;
+              cursor: default;
+            }
+
+            .apartment-number {
+              font-weight: 700;
+              font-size: 1.1rem;
+              margin-bottom: 12px;
+              color: rgba(255, 255, 255, 0.87);
+              letter-spacing: 0.5px;
+            }
+
+            .apartment-debt {
+              font-size: 1.25rem;
+              font-weight: 600;
+              font-variant-numeric: tabular-nums;
+              color: #f44336; // Default red for debt
+              transition: all 0.3s ease;
+
+              &.no-debt {
+                color: #4caf50 !important; // Green for zero debt
+              }
+
+              &.has-debt {
+                color: #f44336 !important; // Red for debt > 0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .last-update {
+    margin-top: 32px;
+    text-align: center;
+    padding: 16px;
+    
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 24px;
+      padding: 12px;
+      
+      p {
+        font-size: 0.8125rem;
+      }
+    }
+  }
+}
+

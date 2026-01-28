@@ -1,0 +1,65 @@
+<div class="bills-container">
+  <div class="header-section">
+    <button mat-icon-button (click)="goBack()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>
+      <mat-icon>receipt_long</mat-icon>
+      Сметки и плащания
+    </h1>
+  </div>
+
+  @if (bills.length > 0) {
+  <div class="bills-list">
+    @for (bill of bills; track bill.id) {
+    <mat-card
+      class="bill-card"
+      [class.paid]="bill.paid"
+      [class.unpaid]="!bill.paid"
+    >
+      <mat-card-content>
+        <div class="bill-header">
+          <div class="bill-icon-wrapper">
+            <mat-icon class="bill-icon">{{ getBillIcon(bill.type) }}</mat-icon>
+          </div>
+          <div class="bill-info">
+            <h2 class="bill-type">{{ bill.type }}</h2>
+            @if (bill.description) {
+            <p class="bill-description">{{ bill.description }}</p>
+            }
+          </div>
+          <div class="bill-amount">
+            @if (bill.amount === null) {
+            <span class="amount-value not-issued">Не е излязла</span>
+            } @else {
+            <span class="amount-value"
+              >€{{ bill.amount | number : "1.2-2" }}</span
+            >
+            } @if (bill.paid) {
+            <span class="paid-badge">Платено</span>
+            } @else {
+            <span class="unpaid-badge">Неплатено</span>
+            }
+          </div>
+        </div>
+        <div class="bill-details">
+          @if (bill.paid && bill.paidDate && bill.amount !== null) {
+          <div class="detail-row">
+            <span class="detail-label">Платено на:</span>
+            <span class="detail-value">{{ bill.paidDate | monthYear }}</span>
+          </div>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+  } @else {
+  <mat-card class="empty-card">
+    <mat-card-content>
+      <mat-icon class="empty-icon">receipt_long</mat-icon>
+      <p>Няма налични сметки</p>
+    </mat-card-content>
+  </mat-card>
+  }
+</div>

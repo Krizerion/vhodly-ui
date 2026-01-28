@@ -1,0 +1,113 @@
+<div class="residents-container">
+  <div class="page-header">
+    <h1>Информация за жителите</h1>
+    <a mat-button [routerLink]="['/bills']" class="bills-link">
+      <mat-icon>receipt_long</mat-icon>
+      Сметки
+    </a>
+  </div>
+
+  <!-- Important Announcements -->
+  @if (announcements.length > 0) {
+  <mat-card class="announcements-card">
+    <mat-card-content>
+      <div class="announcements-header">
+        <mat-icon class="announcements-icon">campaign</mat-icon>
+        <h2>Важни съобщения</h2>
+      </div>
+      <div class="announcements-list">
+        @for (announcement of announcements; track announcement.id) {
+        <div class="announcement-item">
+          <mat-icon class="announcement-icon">{{ announcement.icon }}</mat-icon>
+          <div class="announcement-content">
+            <p class="announcement-text">{{ announcement.message }}</p>
+            @if (announcement.date) {
+            <span class="announcement-date">{{ announcement.date }}</span>
+            }
+          </div>
+        </div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+  }
+
+  <!-- Account Balances -->
+  <div class="accounts-section">
+    <mat-card
+      class="account-card clickable"
+      (click)="openAccountDetails('currentExpenses')"
+    >
+      <mat-card-content>
+        <div class="account-header">
+          <mat-icon class="account-icon">account_balance</mat-icon>
+          <div class="account-info">
+            <h2>Пари в Сметка за текущи разходи</h2>
+            <p class="account-amount">
+              €{{ currentExpensesBalance | number : "1.2-2" }}
+            </p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card
+      class="account-card clickable"
+      (click)="openAccountDetails('repairs')"
+    >
+      <mat-card-content>
+        <div class="account-header">
+          <mat-icon class="account-icon">home_repair_service</mat-icon>
+          <div class="account-info">
+            <h2>Пари в Сметка за ремонти</h2>
+            <p class="account-amount">
+              €{{ currentRepairsBalance | number : "1.2-2" }}
+            </p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Apartment Debt Grid -->
+  <mat-card class="apartments-card">
+    <mat-card-header>
+      <mat-card-title>Дължими суми по апартаменти</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="apartments-grid">
+        @for (floor of floors; track $index) {
+        <div class="floor-row">
+          <div class="floor-label">{{ floor.number }} етаж</div>
+          <div class="apartments-row">
+            @for (apt of floor.apartments; track $index) {
+            <div
+              class="apartment-cell"
+              [class.empty]="!apt.number"
+              [class.clickable]="apt.number"
+              (click)="openApartmentDetails(apt)"
+            >
+              @if (apt.number) {
+              <div class="apartment-number">ап.{{ apt.number }}</div>
+              <div
+                class="apartment-debt"
+                [class.no-debt]="(apt.totalDebt || 0) === 0"
+                [class.has-debt]="(apt.totalDebt || 0) > 0"
+              >
+                €{{ apt.totalDebt || 0 | number : "1.2-2" }}
+              </div>
+              }
+            </div>
+            }
+          </div>
+        </div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Last Update -->
+  <div class="last-update">
+    <p>Последна актуализация: {{ lastUpdate }}</p>
+  </div>
+</div>
