@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DataService } from '../data/data.service';
-import { AccountBalances, type Transaction } from '../data/interfaces';
+import type { Transaction } from '../data/interfaces';
 import { MonthYearPipe } from '../shared/pipes/month-year.pipe';
 
 type AccountType = 'currentExpenses' | 'repairs';
