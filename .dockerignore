@@ -1,0 +1,58 @@
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build outputs
+dist
+.angular
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Test coverage
+coverage
+.nyc_output
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp
+temp
+*.tmp
+
+# Elastic Beanstalk
+.ebextensions
+.elasticbeanstalk
+
+# GitHub Actions (not needed in Docker)
+.github
+
+# Documentation
+README.md
+*.md
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Biome cache
+.biome

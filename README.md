@@ -22,7 +22,9 @@ npm start
 
 ## Деплой
 
-За инструкции как да публикувате приложението на GitHub Pages или други безплатни хостинг платформи, вижте [DEPLOYMENT.md](./DEPLOYMENT.md)
+За инструкции за деплой на AWS Elastic Beanstalk чрез GitHub Actions, вижте:
+- [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) - Подробно ръководство
+- [QUICK_START.md](./QUICK_START.md) - Бърз старт и чеклист
 
 ## Технологии
 
