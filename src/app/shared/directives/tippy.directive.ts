@@ -1,6 +1,6 @@
 import {
   Directive,
-  type ElementRef,
+  ElementRef,
   Input,
   type OnChanges,
   type OnDestroy,
