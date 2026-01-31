@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:prod": "node scripts/start-prod.js",
     "build": "ng build",
     "build:gh-pages": "ng build --base-href=\"/vhodly/\"",
     "watch": "ng build --watch --configuration development",
