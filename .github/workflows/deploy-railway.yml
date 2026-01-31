@@ -1,6 +1,6 @@
 # Deploy to Railway on push to main or manual trigger.
-# Required: Add RAILWAY_TOKEN in GitHub repo Secrets (Project token from Railway → Project → Settings → Tokens).
-# Optional: Add RAILWAY_SERVICE_ID and RAILWAY_ENVIRONMENT_ID for multi-service projects.
+# Required: RAILWAY_TOKEN (Project → Settings → Tokens) and RAILWAY_SERVICE_ID (required when project has multiple services).
+# Optional: RAILWAY_ENVIRONMENT_ID (e.g. production). Get IDs from the Railway dashboard URL or service/environment settings.
 
 name: Deploy to Railway
 
@@ -16,10 +16,20 @@ jobs:
     container: ghcr.io/railwayapp/cli:latest
     env:
       RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      RAILWAY_SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
+      RAILWAY_ENVIRONMENT_ID: ${{ secrets.RAILWAY_ENVIRONMENT_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Deploy to Railway
-        run: railway up
-          
+        run: |
+          if [ -z "$RAILWAY_SERVICE_ID" ]; then
+            echo "::error::RAILWAY_SERVICE_ID is required (project has multiple services). Add it in repo Secrets from Railway dashboard."
+            exit 1
+          fi
+          CMD="railway up --service $RAILWAY_SERVICE_ID"
+          if [ -n "$RAILWAY_ENVIRONMENT_ID" ]; then
+            CMD="$CMD --environment $RAILWAY_ENVIRONMENT_ID"
+          fi
+          $CMD
