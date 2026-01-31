@@ -6,7 +6,7 @@
     "watchPatterns": ["src/**", "public/**", "angular.json", "package.json"]
   },
   "deploy": {
-    "startCommand": "npx serve dist/vhodly-app/browser -s -l $PORT",
+    "startCommand": "serve dist/vhodly-app/browser -s -l $PORT",
     "restartPolicyType": "ON_FAILURE",
     "healthcheckPath": "/",
     "healthcheckTimeout": 30
